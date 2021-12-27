@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {ChangeFilterValuesType, TasksType} from "./App";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
@@ -46,9 +46,9 @@ export function Todolist(props: TodolistPropsType) {
         props.changeTaskStatus(props.todolistID, isDone, tID)
     }
     const onClickRemoveTodolist = () => props.removeTodolist(props.todolistID)
-    const addTaskToTodoList = (title: string) => {
+    const addTaskToTodoList = useCallback((title: string) => {
         props.addTask(props.todolistID, title)
-    }
+    },[props.addTask, props.todolistID])
     const changeTodoListTitle = (title: string) => {
         props.changeTodolistTitle(title, props.todolistID)
     }
